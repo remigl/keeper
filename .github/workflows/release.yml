@@ -3,6 +3,12 @@ name: Release APK
 on:
   push:
     tags: ["v*"]
+  release:
+    types: [published]
+
+concurrency:
+  group: release-${{ github.ref_name }}
+  cancel-in-progress: false
 
 permissions:
   contents: write
@@ -58,6 +64,13 @@ jobs:
             NOTE="Signature temporaire (aucun secret de signature configuré) : une future version signée avec une autre clé ne pourra pas s'installer par-dessus, il faudra désinstaller d'abord."
           else
             NOTE="Signée avec la clé de publication du projet."
+          fi
+          if gh release view "$GITHUB_REF_NAME" >/dev/null 2>&1; then
+            gh release upload "$GITHUB_REF_NAME" "$APK" "$APK.sha256" --clobber
+            gh release edit "$GITHUB_REF_NAME" --notes "$NOTE
+
+          APK Android (8.1+). Aucune permission, aucun accès réseau."
+            exit 0
           fi
           gh release create "$GITHUB_REF_NAME" "$APK" "$APK.sha256" \
             --title "Keeper $GITHUB_REF_NAME" \
