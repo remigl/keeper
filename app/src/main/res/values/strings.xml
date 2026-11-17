@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Keeper</string>
+    <string name="service_label">Keeper – journal des notifications</string>
+
+    <string name="intro">Keeper enregistre chaque notification reçue (heure, application, titre, texte) dans un fichier texte local. Rien ne quitte le téléphone : l\'application n\'a pas accès à Internet. Seuls le fichier du jour et le précédent sont conservés.</string>
+
+    <string name="section_status">État</string>
+    <string name="access_on">Accès aux notifications : activé</string>
+    <string name="access_off">Accès aux notifications : désactivé</string>
+    <string name="service_connected">Service : connecté, enregistrement actif</string>
+    <string name="service_waiting">Service : en attente de connexion par Android</string>
+    <string name="service_off">Service : inactif (accès non accordé)</string>
+
+    <string name="current_file">Fichier actuel : %1$s</string>
+    <string name="previous_file">Fichier précédent : %1$s</string>
+    <string name="no_file">aucun</string>
+    <string name="entries_today">Notifications enregistrées aujourd\'hui : %1$d</string>
+    <string name="last_write">Dernier enregistrement : %1$s</string>
+    <string name="never">jamais</string>
+    <string name="write_error">Dernière erreur d\'écriture : %1$s (%2$s). Entrées en attente : %3$d</string>
+    <string name="folder">Dossier : %1$s</string>
+    <string name="loading">…</string>
+
+    <string name="section_setup">Configuration</string>
+    <string name="setup_help">1. Touchez « Accès aux notifications » et activez Keeper.\n2. Si l\'option est grisée (application installée hors Play Store, Android 13+) : ouvrez « Infos de l\'application », menu ⋮ → « Autoriser les paramètres restreints », puis recommencez l\'étape 1.\n\nEnsuite, l\'application n\'a plus besoin d\'être ouverte : Android la réveille uniquement quand une notification arrive, y compris après un redémarrage.</string>
+    <string name="btn_listener_settings">Accès aux notifications</string>
+    <string name="btn_app_info">Infos de l\'application</string>
+    <string name="btn_rebind">Demander la reconnexion du service</string>
+
+    <string name="section_logs">Journaux</string>
+    <string name="btn_open_current">Ouvrir le log du jour</string>
+    <string name="btn_open_previous">Ouvrir le log précédent</string>
+    <string name="open_with">Ouvrir le log avec</string>
+    <string name="close">Fermer</string>
+    <string name="viewer_truncated">[… début du fichier non affiché …]\n</string>
+    <string name="file_missing">Ce fichier n\'existe pas encore.</string>
+    <string name="cannot_open_settings">Impossible d\'ouvrir les paramètres.</string>
+
+    <string name="limits">À savoir : Android ne transmet aucune notification avant le premier déverrouillage qui suit un redémarrage ; celles encore affichées à ce moment sont rattrapées. Depuis Android 15, le système masque le contenu de certaines notifications sensibles (codes à usage unique) aux applications comme Keeper : elles sont journalisées telles qu\'Android les fournit.</string>
+</resources>

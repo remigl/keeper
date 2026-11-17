@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="accent">#2E5E4E</color>
+    <color name="accent_night">#8FC9B4</color>
+    <color name="ok">#2E7D32</color>
+    <color name="warn">#C62828</color>
+    <color name="icon_background">#2E5E4E</color>
+    <color name="icon_foreground">#F4F1E8</color>
+</resources>

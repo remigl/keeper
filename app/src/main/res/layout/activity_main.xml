@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipToPadding="false">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"
+            android:textAppearance="@android:style/TextAppearance.Material.Headline" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/intro"
+            android:textAppearance="@android:style/TextAppearance.Material.Body1" />
+
+        <TextView
+            style="@style/Keeper.Section"
+            android:text="@string/section_status" />
+
+        <TextView
+            android:id="@+id/access"
+            style="@style/Keeper.Line"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/service"
+            style="@style/Keeper.Line" />
+
+        <TextView
+            android:id="@+id/currentFile"
+            style="@style/Keeper.Line"
+            android:text="@string/loading" />
+
+        <TextView
+            android:id="@+id/previousFile"
+            style="@style/Keeper.Line" />
+
+        <TextView
+            android:id="@+id/entries"
+            style="@style/Keeper.Line" />
+
+        <TextView
+            android:id="@+id/lastWrite"
+            style="@style/Keeper.Line" />
+
+        <TextView
+            android:id="@+id/error"
+            style="@style/Keeper.Line"
+            android:textColor="@color/warn"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/folder"
+            style="@style/Keeper.Line"
+            android:textAppearance="@android:style/TextAppearance.Material.Caption"
+            android:textIsSelectable="true" />
+
+        <TextView
+            style="@style/Keeper.Section"
+            android:text="@string/section_setup" />
+
+        <TextView
+            style="@style/Keeper.Line"
+            android:text="@string/setup_help" />
+
+        <Button
+            android:id="@+id/btnListenerSettings"
+            style="@style/Keeper.Button"
+            android:text="@string/btn_listener_settings" />
+
+        <Button
+            android:id="@+id/btnAppInfo"
+            style="@style/Keeper.Button"
+            android:text="@string/btn_app_info" />
+
+        <Button
+            android:id="@+id/btnRebind"
+            style="@style/Keeper.Button"
+            android:text="@string/btn_rebind"
+            android:visibility="gone" />
+
+        <TextView
+            style="@style/Keeper.Section"
+            android:text="@string/section_logs" />
+
+        <Button
+            android:id="@+id/btnOpenCurrent"
+            style="@style/Keeper.Button"
+            android:text="@string/btn_open_current" />
+
+        <Button
+            android:id="@+id/btnOpenPrevious"
+            style="@style/Keeper.Button"
+            android:text="@string/btn_open_previous" />
+
+        <TextView
+            style="@style/Keeper.Line"
+            android:layout_marginTop="20dp"
+            android:text="@string/limits"
+            android:textAppearance="@android:style/TextAppearance.Material.Caption" />
+    </LinearLayout>
+</ScrollView>
