@@ -29,13 +29,29 @@
     <string name="btn_rebind">Demander la reconnexion du service</string>
 
     <string name="section_logs">Journaux</string>
-    <string name="btn_open_current">Ouvrir le log du jour</string>
-    <string name="btn_open_previous">Ouvrir le log précédent</string>
-    <string name="open_with">Ouvrir le log avec</string>
-    <string name="close">Fermer</string>
-    <string name="viewer_truncated">[… début du fichier non affiché …]\n</string>
+    <string name="btn_view">Voir les notifications</string>
     <string name="file_missing">Ce fichier n\'existe pas encore.</string>
     <string name="cannot_open_settings">Impossible d\'ouvrir les paramètres.</string>
 
     <string name="limits">À savoir : Android ne transmet aucune notification avant le premier déverrouillage qui suit un redémarrage ; celles encore affichées à ce moment sont rattrapées. Depuis Android 15, le système masque le contenu de certaines notifications sensibles (codes à usage unique) aux applications comme Keeper : elles sont journalisées telles qu\'Android les fournit.</string>
+
+    <string name="viewer_title">Notifications enregistrées</string>
+    <string name="today">Aujourd\'hui</string>
+    <string name="yesterday">Hier</string>
+    <string name="all_apps">Toutes (%1$d)</string>
+    <string name="app_chip">%1$s (%2$d)</string>
+    <string name="sort_newest">↓ Plus récentes</string>
+    <string name="sort_oldest">↑ Plus anciennes</string>
+    <string name="time_any">Heure : toute la journée</string>
+    <string name="time_range">Heure : %1$s – %2$s</string>
+    <string name="time_clear">✕ Heure</string>
+    <string name="pick_from">À partir de…</string>
+    <string name="pick_to">Jusqu\'à…</string>
+    <string name="raw_file">Fichier brut</string>
+    <string name="summary">%1$d notification(s) sur %2$d</string>
+    <string name="empty_day">Aucune notification enregistrée ce jour-là.</string>
+    <string name="empty_filter">Aucune notification ne correspond aux filtres.</string>
+    <string name="no_log">Aucun fichier de log pour l\'instant.</string>
+    <string name="no_viewer">Aucune application ne peut ouvrir un fichier texte.</string>
+    <string name="read_error">Lecture du fichier impossible.</string>
 </resources>

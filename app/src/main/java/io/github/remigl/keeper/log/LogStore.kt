@@ -3,7 +3,6 @@ package io.github.remigl.keeper.log
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
-import java.io.RandomAccessFile
 import java.time.LocalDate
 import java.time.ZonedDateTime
 import java.util.concurrent.LinkedBlockingQueue
@@ -116,23 +115,6 @@ class LogStore(
         file.bufferedReader(Charsets.UTF_8).useLines { lines -> lines.count { it == LogFormat.SEPARATOR } }
     } catch (e: IOException) {
         0
-    }
-
-    /** Last [maxBytes] of a log file, starting at a line boundary. */
-    fun readTail(file: File, maxBytes: Int): Pair<String, Boolean> {
-        RandomAccessFile(file, "r").use { raf ->
-            val length = raf.length()
-            val start = maxOf(0L, length - maxBytes)
-            val buffer = ByteArray((length - start).toInt())
-            raf.seek(start)
-            raf.readFully(buffer)
-            var offset = 0
-            if (start > 0) {
-                while (offset < buffer.size && buffer[offset] != '\n'.code.toByte()) offset++
-                if (offset < buffer.size) offset++
-            }
-            return String(buffer, offset, buffer.size - offset, Charsets.UTF_8) to (start > 0)
-        }
     }
 
     private fun currentFileLocked(): File {

@@ -13,6 +13,18 @@
         android:name="android.permission.INTERNET"
         tools:node="remove" />
 
+    <!--
+        Package visibility (Android 11+), only so the viewer can show the name and icon of the apps
+        that posted notifications. Not a permission; covers every app with a launcher icon.
+        Others are shown with their package name.
+    -->
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent>
+    </queries>
+
     <application
         android:allowBackup="false"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -32,6 +44,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".ViewerActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity" />
 
         <!-- exported="true" is mandatory so the system can bind it; only the system holds the permission. -->
         <service

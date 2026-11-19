@@ -95,14 +95,9 @@
             android:text="@string/section_logs" />
 
         <Button
-            android:id="@+id/btnOpenCurrent"
+            android:id="@+id/btnView"
             style="@style/Keeper.Button"
-            android:text="@string/btn_open_current" />
-
-        <Button
-            android:id="@+id/btnOpenPrevious"
-            style="@style/Keeper.Button"
-            android:text="@string/btn_open_previous" />
+            android:text="@string/btn_view" />
 
         <TextView
             style="@style/Keeper.Line"

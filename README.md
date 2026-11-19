@@ -6,10 +6,13 @@ Application Android native (Kotlin, aucune bibliothèque tierce) qui **journalis
 
 ```
 MainActivity               écran d'état / configuration (facultatif après la mise en route)
+ViewerActivity             lecture des logs : jour actuel ou précédent, filtre par app, tri et plage horaire
+AppIcons                   nom et icône des apps (affichage uniquement, cache en mémoire)
 NotificationLoggerService  NotificationListenerService : observe, extrait, transmet l'entrée
 Keeper                     singleton du processus → un seul LogStore (un verrou, un thread d'écriture)
 log/LogStore               dossier, rotation quotidienne, écritures sérialisées + fsync, file d'attente en cas d'erreur
 log/LogFormat              format texte d'une entrée (Kotlin pur, testé)
+log/LogParser              relecture tolérante de ce format (Kotlin pur, testé)
 LogProvider                ContentProvider non exporté, lecture seule, pour « Ouvrir le log »
 ```
 
@@ -23,6 +26,7 @@ Pas de base de données, pas de SharedPreferences, pas de WorkManager, pas de se
 - Pas de `RECEIVE_BOOT_COMPLETED` : Android relie lui-même le listener après chaque démarrage.
 - Pas de `POST_NOTIFICATIONS` : l'app n'affiche aucune notification.
 - Pas de permission de stockage : les logs sont dans le stockage interne privé.
+- Une déclaration `<queries>` (ce n'est pas une permission) rend visibles les apps qui ont une icône dans le lanceur, pour afficher leur nom et leur logo dans la visionneuse. Les autres (certains composants système) apparaissent avec leur nom de package et une pastille à initiale.
 
 ## Réception des notifications
 
@@ -41,7 +45,7 @@ Deux comportements ajoutés pour la fiabilité :
 
 - Privé à l'application : aucune autre app n'y a accès, aucune permission n'est nécessaire.
 - Sauvegarde désactivée (`allowBackup="false"`) et `data_extraction_rules.xml` exclut tout, sauvegarde cloud **et** transfert d'appareil à appareil.
-- Le bouton « Ouvrir le log » passe par un `ContentProvider` **non exporté** avec une autorisation de lecture temporaire, limitée au fichier choisi (`FLAG_GRANT_READ_URI_PERMISSION`). S'il n'y a aucune application de lecture de texte, le log s'affiche dans l'app (les derniers 256 Ko).
+- Le bouton « Fichier brut » de la visionneuse passe par un `ContentProvider` **non exporté** avec une autorisation de lecture temporaire, limitée au fichier choisi (`FLAG_GRANT_READ_URI_PERMISSION`).
 - En développement : `adb exec-out run-as io.github.remigl.keeper cat files/NotificationLogger/2026-11-17.log` (build debug uniquement).
 
 ### Format
@@ -60,6 +64,18 @@ Text: Bonjour, tu as reçu un nouveau message.
 - Titre ou texte absent → champ vide (la clé est toujours présente).
 - Caractères de contrôle supprimés, retours à la ligne normalisés, Unicode conservé (UTF-8).
 - Champ limité à 10 000 caractères, avec la mention `[…N caractères tronqués]`.
+
+## Visionneuse
+
+« Voir les notifications » lit directement le fichier du jour ou le précédent (onglets *Aujourd'hui* / *Hier*, ou la date du fichier si ce n'est pas la veille) :
+
+- pastilles par application, avec logo, nom et nombre de notifications, triées de la plus bavarde à la moins bavarde ;
+- tri *plus récentes* / *plus anciennes* ;
+- plage horaire « de … à … » (une plage comme 22:00 – 06:00 passe minuit) ;
+- un appui sur une notification déplie son texte ;
+- « Fichier brut » ouvre le `.log` dans une autre app via une autorisation temporaire.
+
+La lecture et la résolution des icônes se font hors du thread principal ; rien n'est écrit, rien n'est gardé après la fermeture de l'écran.
 
 ## Rotation
 
@@ -83,7 +99,7 @@ En usage normal, c'est « hier + aujourd'hui ». Après 5 jours téléphone éte
 - Aucune connexion réseau possible (pas de permission `INTERNET`), pas d'analytics, pas de SDK, pas de dépendance d'exécution, pas de bloc de métadonnées des dépendances dans l'APK.
 - Logs dans le stockage privé, exclus de toute sauvegarde ou transfert.
 - Rien dans Logcat en release : R8 supprime tous les appels `android.util.Log`, et même en debug les erreurs ne contiennent que le type d'exception, jamais le contenu.
-- `FLAG_SECURE` sur l'écran de l'app : pas de capture d'écran ni de miniature dans les apps récentes.
+- `FLAG_SECURE` sur les écrans de l'app : pas de capture d'écran ni de miniature dans les apps récentes.
 - Écriture : l'entrée complète est écrite en un seul `write()` puis `fsync`. Si le stockage est indisponible, jusqu'à 200 entrées restent en mémoire et sont écrites à la notification suivante.
 
 ## Limites d'Android (pas de contournement)
